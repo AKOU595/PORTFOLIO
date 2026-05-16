@@ -172,16 +172,20 @@
       animation: fadeUp 1.2s 0.4s var(--ease-smooth) both;
     }
     .hero .profile-img {
-      width: 80px; height: 80px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), var(--red));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; color: var(--luster);
+      width: 100px; height: 100px; border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--glass-edge);
       box-shadow: 0 0 40px rgba(133, 161, 242, 0.3);
-      position: relative;
+      position: relative; flex-shrink: 0;
+    }
+    .hero .profile-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
     }
     .hero .profile-img::after {
-      content: ''; position: absolute; inset: -3px; border-radius: 50%;
-      border: 1px solid var(--glass-edge);
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+      pointer-events: none;
     }
     .hero .profile-text {
       text-align: left;
@@ -778,7 +782,7 @@
     <p class="sub-arabic" style="font-family:Impact,'Arial Black',sans-serif;letter-spacing:4px;text-transform:uppercase;font-weight:900">Akram Mahdid</p>
 
     <div class="profile-row">
-      <div class="profile-img"><i class="fas fa-user"></i></div>
+      <div class="profile-img"><img src="p.png" alt="Akram Mahdid">
       <div class="profile-text">
         <span>Creator</span>
         <strong>Akram Mahdid</strong>

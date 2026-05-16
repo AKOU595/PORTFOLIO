@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UGC Photography Gallery | FIRST STEP STUDIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--luster:#FDFDFD;--blue:#85A1F2;--red:#EB4C42;--bg-deep:#0a0a12;--bg-card:rgba(253,253,253,0.04);--glass-edge:rgba(253,253,253,0.08);--glass-blur:blur(24px);--ease-fluid:cubic-bezier(0.25,0.46,0.45,0.94);--ease-smooth:cubic-bezier(0.16,1,0.3,1);--ease-spring:cubic-bezier(0.34,1.56,0.64,1)}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg-deep);color:var(--luster);overflow-x:hidden;min-height:100vh}
+    ::selection{background:var(--red);color:var(--luster)}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:var(--bg-deep)}
+    ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
+
+    .bg-shapes{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .bg-shapes .shape{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;animation:floatShape 20s infinite var(--ease-fluid)}
+    .bg-shapes .shape:nth-child(1){width:500px;height:500px;background:var(--blue);top:-10%;left:-5%;animation-delay:0s}
+    .bg-shapes .shape:nth-child(2){width:400px;height:400px;background:var(--red);bottom:-5%;right:-5%;animation-delay:-5s}
+    .bg-shapes .shape:nth-child(3){width:300px;height:300px;background:var(--blue);top:40%;left:50%;animation-delay:-10s;opacity:.08}
+    @keyframes floatShape{0%,100%{transform:translate(0,0)rotate(0deg)scale(1)}25%{transform:translate(60px,-40px)rotate(5deg)scale(1.05)}50%{transform:translate(-30px,60px)rotate(-3deg)scale(.95)}75%{transform:translate(40px,30px)rotate(4deg)scale(1.02)}}
+    .lens-flare{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 30% 20%,rgba(133,161,242,0.03)0%,transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(235,76,66,0.03)0%,transparent 60%)}
+
+    @keyframes liquidBlob{0%{border-radius:60% 40% 70% 30%/30% 60% 40% 70%;transform:rotate(0deg)}25%{border-radius:40% 60% 30% 70%/60% 30% 70% 40%;transform:rotate(3deg)}50%{border-radius:70% 30% 50% 50%/40% 50% 50% 60%;transform:rotate(0deg)}75%{border-radius:30% 70% 60% 40%/50% 40% 60% 50%;transform:rotate(-3deg)}100%{border-radius:60% 40% 70% 30%/30% 60% 40% 70%;transform:rotate(0deg)}}
+    @keyframes liquidBlob2{0%{border-radius:40% 60% 30% 70%/60% 30% 70% 40%;transform:rotate(0deg)}25%{border-radius:60% 40% 70% 30%/30% 60% 40% 70%;transform:rotate(-4deg)}50%{border-radius:30% 70% 50% 50%/60% 40% 50% 50%;transform:rotate(0deg)}75%{border-radius:70% 30% 40% 60%/40% 60% 30% 70%;transform:rotate(4deg)}100%{border-radius:40% 60% 30% 70%/60% 30% 70% 40%;transform:rotate(0deg)}}
+    @keyframes shimmerSlide{0%{transform:translateX(-100%)rotate(15deg)}100%{transform:translateX(200%)rotate(15deg)}}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);background:rgba(10,10,18,.85);border-bottom:1px solid var(--glass-edge);display:flex;align-items:center;justify-content:space-between}
+    nav .logo{font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:var(--luster);text-decoration:none}
+    nav .back-link{display:flex;align-items:center;gap:8px;color:rgba(253,253,253,.6);text-decoration:none;font-size:.85rem;transition:color .3s}
+    nav .back-link:hover{color:var(--blue)}
+
+    section{position:relative;z-index:1}
+    .gallery-header{padding:120px 24px 0;text-align:center;position:relative}
+    .gallery-header .hero-blob{position:absolute;width:180px;height:180px;top:-40px;left:50%;transform:translateX(-50%);background:rgba(133,161,242,0.03);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.04);animation:liquidBlob 12s infinite var(--ease-fluid);z-index:0;pointer-events:none}
+    .gallery-header h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(3rem,7vw,5rem);background:linear-gradient(135deg,var(--luster)20%,var(--blue)70%,#a855f7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;z-index:1}
+    .gallery-header .sub{font-family:'Tajawal',sans-serif;font-size:1.4rem;color:rgba(253,253,253,.4);margin-top:4px;position:relative;z-index:1}
+    .gallery-header .accent-line{width:80px;height:2px;background:linear-gradient(90deg,var(--blue),var(--red));margin:20px auto 0;border-radius:2px;position:relative;z-index:1}
+
+    .gallery-section{max-width:1200px;margin:0 auto;padding:0 24px 48px}
+    .gallery-section .section-title{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+    .gallery-section .section-title i{color:var(--blue);font-size:1rem}
+    .gallery-section .section-title span{font-size:.75rem;color:rgba(253,253,253,.3);font-family:'Inter',sans-serif}
+
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+    .video-card{border-radius:20px;overflow:hidden;background:var(--bg-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-edge);transition:all .4s var(--ease-fluid);cursor:pointer;position:relative}
+    .video-card:hover{transform:translateY(-6px);border-color:rgba(133,161,242,.2);box-shadow:0 12px 48px rgba(133,161,242,.08)}
+    .video-card .thumb{position:relative;aspect-ratio:16/9;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg-deep)}
+    .video-card .thumb .thumb-img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .5s var(--ease-smooth)}
+    .video-card .thumb .thumb-img.loaded{opacity:1}
+    .video-card .thumb .thumb-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1}
+    .video-card .thumb .thumb-loading i{font-size:1.5rem;color:rgba(253,253,253,.1)}
+    .video-card .thumb .thumb-loading.hide{display:none}
+    .video-card .thumb .liquid-blob{position:absolute;width:65%;height:65%;z-index:1;top:17%;left:17%;background:rgba(255,255,255,0.03);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border:1px solid rgba(255,255,255,0.06);animation:liquidBlob 8s infinite var(--ease-fluid);pointer-events:none}
+    .video-card .thumb .liquid-blob-2{position:absolute;width:45%;height:45%;z-index:1;top:28%;left:28%;background:rgba(133,161,242,0.03);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);border:1px solid rgba(133,161,242,0.05);animation:liquidBlob2 10s infinite var(--ease-fluid) reverse;pointer-events:none}
+    .video-card .thumb .shimmer-line{position:absolute;inset:0;z-index:2;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.04) 35%,rgba(133,161,242,0.06) 40%,rgba(255,255,255,0.04) 45%,transparent 50%);background-size:300% 100%;transform:translateX(-100%);pointer-events:none}
+    .video-card:hover .thumb .shimmer-line{animation:shimmerSlide .8s var(--ease-smooth) forwards}
+    .video-card .thumb .file-name{position:absolute;bottom:10px;left:10px;right:10px;z-index:3;padding:6px 10px;border-radius:8px;background:rgba(10,10,18,.7);backdrop-filter:blur(8px);font-size:.7rem;color:rgba(253,253,253,.7);text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+    .video-card .thumb .file-name i{margin-right:6px;color:var(--blue)}
+    .video-card .thumb .play-overlay{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;background:rgba(10,10,18,.35);opacity:0;transition:opacity .3s}
+    .video-card:hover .thumb .play-overlay{opacity:1}
+    .video-card .thumb .play-overlay .play-btn{width:52px;height:52px;border-radius:50%;background:rgba(253,253,253,.15);backdrop-filter:blur(12px);border:1px solid rgba(253,253,253,.2);display:flex;align-items:center;justify-content:center;color:var(--luster);font-size:1.2rem;transition:transform .3s var(--ease-spring)}
+    .video-card:hover .thumb .play-overlay .play-btn{transform:scale(1.1)}
+    .video-card .body{padding:14px 16px;position:relative;z-index:1}
+    .video-card .body .card-title{font-size:.85rem;font-weight:600;color:rgba(253,253,253,.7)}
+    .video-card .body .card-meta{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+    .video-card .body .card-meta span{font-size:.7rem;color:rgba(253,253,253,.3)}
+
+    footer{padding:40px 24px;border-top:1px solid var(--glass-edge);position:relative;z-index:1;text-align:center}
+    footer .contact-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:24px}
+    footer .contact-row a{color:rgba(253,253,253,.5);text-decoration:none;font-size:.85rem;transition:color .3s}
+    footer .contact-row a:hover{color:var(--blue)}
+    footer .social-row{display:flex;justify-content:center;gap:16px;margin-bottom:24px}
+    footer .social-row a{width:44px;height:44px;border-radius:50%;background:var(--bg-card);backdrop-filter:var(--glass-blur);border:1px solid var(--glass-edge);display:flex;align-items:center;justify-content:center;color:var(--luster);font-size:1.1rem;text-decoration:none;transition:all .3s var(--ease-spring)}
+    footer .social-row a:hover{transform:translateY(-3px);border-color:var(--blue);color:var(--blue)}
+    footer .copy{font-size:.7rem;color:rgba(253,253,253,.2)}
+
+    .video-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;background:rgba(10,10,18,.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px)}
+    .video-modal.open{display:flex}
+    .video-modal .modal-bg{position:absolute;inset:0;z-index:0;cursor:pointer}
+    .video-modal .modal-content{position:relative;z-index:1;width:90%;max-width:900px;border-radius:24px;overflow:hidden;background:var(--bg-deep);border:1px solid var(--glass-edge);box-shadow:0 40px 80px rgba(10,10,18,.8)}
+    .video-modal .modal-content video{width:100%;display:block;max-height:80vh}
+    .video-modal .modal-close{position:absolute;top:16px;right:16px;z-index:2;width:40px;height:40px;border-radius:50%;background:rgba(253,253,253,.08);backdrop-filter:blur(12px);border:1px solid var(--glass-edge);color:var(--luster);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s var(--ease-fluid)}
+    .video-modal .modal-close:hover{background:var(--red);border-color:var(--red);box-shadow:0 0 30px rgba(235,76,66,.3)}
+
+    @media(max-width:768px){
+      nav{padding:14px 20px}
+      .gallery-header{padding:100px 16px 0}
+      .gallery-section{padding:0 16px 32px}
+      .gallery-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+    @media(max-width:480px){.gallery-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="bg-shapes"><div class="shape"></div><div class="shape"></div><div class="shape"></div></div>
+  <div class="lens-flare"></div>
+
+  <nav>
+    <a href="../index.html" class="logo">FIRST STEP STUDIO</a>
+    <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+  </nav>
+
+  <section>
+    <div class="gallery-header">
+      <div class="hero-blob"></div>
+      <h1>UGC Photography</h1>
+      <p class="sub">تصوير</p>
+      <div class="accent-line"></div>
+    </div>
+
+    <div class="gallery-section">
+      <div class="section-title"><i class="fas fa-box"></i> Product Content <span>— 3 projects</span></div>
+      <div class="gallery-grid">
+        <div class="video-card" data-video="ads.mp4">
+          <div class="thumb">
+            <div class="thumb-img"></div>
+            <div class="thumb-loading"><i class="fas fa-circle-notch fa-spin"></i></div>
+            <div class="liquid-blob"></div>
+            <div class="liquid-blob-2"></div>
+            <div class="shimmer-line"></div>
+            <span class="file-name"><i class="fas fa-play-circle"></i>ads.mp4</span>
+            <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+          </div>
+          <div class="body"><div class="card-title">Ads</div><div class="card-meta"><span><i class="far fa-file-video"></i> MP4</span></div></div>
+        </div>
+        <div class="video-card" data-video="yasmina 4.mp4">
+          <div class="thumb">
+            <div class="thumb-img"></div>
+            <div class="thumb-loading"><i class="fas fa-circle-notch fa-spin"></i></div>
+            <div class="liquid-blob"></div>
+            <div class="liquid-blob-2"></div>
+            <div class="shimmer-line"></div>
+            <span class="file-name"><i class="fas fa-play-circle"></i>yasmina 4.mp4</span>
+            <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+          </div>
+          <div class="body"><div class="card-title">Yasmina 4</div><div class="card-meta"><span><i class="far fa-file-video"></i> MP4</span></div></div>
+        </div>
+        <div class="video-card" data-video="HOCO 2.MOV">
+          <div class="thumb">
+            <div class="thumb-img"></div>
+            <div class="thumb-loading"><i class="fas fa-circle-notch fa-spin"></i></div>
+            <div class="liquid-blob"></div>
+            <div class="liquid-blob-2"></div>
+            <div class="shimmer-line"></div>
+            <span class="file-name"><i class="fas fa-play-circle"></i>HOCO 2.MOV</span>
+            <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+          </div>
+          <div class="body"><div class="card-title">HOCO 2</div><div class="card-meta"><span><i class="far fa-file-video"></i> MOV</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-section">
+      <div class="section-title"><i class="fas fa-palm-tree"></i> Brand Collaborations <span>— 2 projects</span></div>
+      <div class="gallery-grid">
+        <div class="video-card" data-video="NAKHLA 1.MP4">
+          <div class="thumb">
+            <div class="thumb-img"></div>
+            <div class="thumb-loading"><i class="fas fa-circle-notch fa-spin"></i></div>
+            <div class="liquid-blob"></div>
+            <div class="liquid-blob-2"></div>
+            <div class="shimmer-line"></div>
+            <span class="file-name"><i class="fas fa-play-circle"></i>NAKHLA 1.MP4</span>
+            <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+          </div>
+          <div class="body"><div class="card-title">Nakhla 1</div><div class="card-meta"><span><i class="far fa-file-video"></i> MP4</span></div></div>
+        </div>
+        <div class="video-card" data-video="NAKHLA.MOV">
+          <div class="thumb">
+            <div class="thumb-img"></div>
+            <div class="thumb-loading"><i class="fas fa-circle-notch fa-spin"></i></div>
+            <div class="liquid-blob"></div>
+            <div class="liquid-blob-2"></div>
+            <div class="shimmer-line"></div>
+            <span class="file-name"><i class="fas fa-play-circle"></i>NAKHLA.MOV</span>
+            <div class="play-overlay"><div class="play-btn"><i class="fas fa-play"></i></div></div>
+          </div>
+          <div class="body"><div class="card-title">Nakhla</div><div class="card-meta"><span><i class="far fa-file-video"></i> MOV</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="contact-row">
+      <a href="tel:0549181248"><i class="fas fa-phone"></i> 0549181248</a>
+      <a href="mailto:hello@firststepstudio.com"><i class="fas fa-envelope"></i> hello@firststepstudio.com</a>
+      <a href="#"><i class="fas fa-map-marker-alt"></i> Alger Chlef</a>
+    </div>
+    <div class="social-row">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="copy">&copy; 2026 FIRST STEP STUDIO</div>
+  </footer>
+
+  <div class="video-modal" id="videoModal">
+    <div class="modal-bg" onclick="closeModal()"></div>
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      <video id="modalVideo" controls playsinline></video>
+    </div>
+  </div>
+
+  <script>
+    const modal=document.getElementById('videoModal');
+    const modalVideo=document.getElementById('modalVideo');
+    function openModal(src){modalVideo.src=src;modal.classList.add('open');document.body.style.overflow='hidden'}
+    function closeModal(){modal.classList.remove('open');modalVideo.pause();modalVideo.src='';document.body.style.overflow=''}
+    document.querySelectorAll('.video-card').forEach(c=>{c.addEventListener('click',()=>{openModal(c.dataset.video)})});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+    document.querySelectorAll('.video-card').forEach(c=>{
+      const v=c.dataset.video;const i=c.querySelector('.thumb-img');const l=c.querySelector('.thumb-loading');
+      if(!i||!v)return;const t=document.createElement('video');t.preload='metadata';t.muted=true;t.playsInline=true;t.src=v;
+      let d=false;const s=setTimeout(()=>{if(!d){d=true;if(l)l.classList.add('hide');t.remove()}},8000);
+      t.addEventListener('loadeddata',()=>{if(d)return;t.currentTime=Math.min(1,(t.duration||10)*0.15)});
+      t.addEventListener('seeked',()=>{
+        if(d)return;d=true;clearTimeout(s);
+        try{const c=document.createElement('canvas');c.width=320;c.height=180;c.getContext('2d').drawImage(t,0,0,320,180);const u=c.toDataURL('image/jpeg',0.7);i.style.backgroundImage='url('+u+')';i.classList.add('loaded')}catch(e){}
+        if(l)l.classList.add('hide');t.remove()});
+      t.addEventListener('error',()=>{if(!d){d=true;clearTimeout(s);if(l)l.classList.add('hide');t.remove()}});
+      t.load()});
+  </script>
+</body>
+</html>

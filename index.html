@@ -484,6 +484,22 @@
     }
 
 
+    .brands-section{text-align:center;margin-bottom:48px}
+    .brands-label{font-size:.75rem;color:rgba(253,253,253,.25);text-transform:uppercase;letter-spacing:3px;margin-bottom:20px}
+    .brands-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+    .brand-item{background:var(--bg-card);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-edge);border-radius:16px;padding:16px 28px;transition:all .4s var(--ease-fluid)}
+    .brand-item:hover{transform:translateY(-3px);border-color:rgba(133,161,242,.2);box-shadow:0 8px 32px rgba(133,161,242,.08)}
+    .brand-item span{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;color:rgba(253,253,253,.6);letter-spacing:1px}
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid var(--glass-edge);
+      font-size: 0.75rem;
+      color: rgba(253, 253, 253, 0.25);
+      letter-spacing: 0.5px;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
@@ -768,7 +784,24 @@
         </div>
       </div>
 
+      <div class="brands-section">
+        <div class="brands-label">Trusted by</div>
+        <div class="brands-row">
+          <div class="brand-item"><span>BISAN</span></div>
+          <div class="brand-item"><span>PEAK</span></div>
+          <div class="brand-item"><span>MAISON ACACIA</span></div>
+          <div class="brand-item"><span>GRANI BIO</span></div>
+          <div class="brand-item"><span>Chef Abdou</span></div>
+          <div class="brand-item"><span>Prof Lounis</span></div>
+          <div class="brand-item"><span>Prof Rahal</span></div>
+          <div class="brand-item"><span>Oscar Fashion</span></div>
+          <div class="brand-item"><span>Salle Yasmina</span></div>
+        </div>
+      </div>
 
+      <div class="footer-bottom">
+        &copy; 2026 PORTFOLIO &mdash; All rights reserved
+      </div>
     </div>
   </footer>
 
